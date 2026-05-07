@@ -1,29 +1,42 @@
-# stiff-ODEs
+# Stiff ODEs: Implicit vs Explicit Euler
 
-This repository contains a complete stiff-ODE numerical methods project focused on modeling and solving a stiff first-order system with implicit methods.
+A numerical methods project modeling a stiff first-order chemical kinetics ODE, demonstrating why explicit Euler fails at practical step sizes and how implicit Euler remains stable. The notebook includes a closed-form solution, stability analysis, and plots comparing trajectories.
 
-## Project Scope
+## Project Description
 
-- Problem type: stiff ordinary differential equations
-- Core objective: show stiffness behavior and compare stable/unstable numerical integration behavior
-- Method focus: explicit Euler (failure regime) and implicit/backward Euler (stable regime)
-- Deliverable style: technical report with equations, implementation, plots, and interpretation
+This project studies a stiff system derived from fast chemical decay toward a slowly varying equilibrium:
 
-## Files
+$$\frac{dC}{dt} = -k\bigl(C - C_{\text{eq}}(t)\bigr), \quad k = 10^{4}\ \text{s}^{-1}, \quad C_{\text{eq}}(t) = 1 + 0.1\sin(0.1t).$$
 
-- `Stiff_ODEs_Report.ipynb`: primary source notebook with code and narrative
+The fast reaction time scale ($10^{-4}$ s) and the slow equilibrium drift ($\approx 63$ s) yield a stiffness ratio of $\sim 6.3\times10^{5}$, making explicit methods impractical for stable integration over the slow dynamics.
 
-## Contents Overview
+## What the Notebook Covers
 
-The report/notebook covers:
-- system definition and parameter setup for a stiff ODE
-- numerical stability motivation for time-step selection
-- implementation of explicit and implicit update schemes
-- equation setup for implicit residual/Jacobian terms
-- Newton-style solve flow (where applicable)
-- visual comparison of numerical trajectories
-- concise interpretation of model and method behavior
+- Problem setup, parameter definitions, and analytical solution
+- Stiffness analysis and explicit Euler stability limits
+- Explicit Euler behavior at large, medium, and tiny time steps
+- Implicit (backward) Euler formulation with Newton-Raphson updates
+- Visual comparison of numerical trajectories and stability outcomes
 
-## How To Use This Repo
+## Requirements
 
-1. Open `Stiff_ODEs_Report.ipynb` to inspect code cells and rerun computations.
+- Python 3.9+
+- NumPy
+- Matplotlib
+- Jupyter Notebook or Google Colab
+
+## How to Run
+
+1. Open `Stiff_ODEs_Report.ipynb` in Jupyter or Google Colab.
+2. Run all cells in order to reproduce the figures and printed summaries.
+
+## Outputs
+
+Plots are saved to:
+
+- `~/Downloads/` on a local machine
+- `/content/` when running in Google Colab
+
+## Repository Contents
+
+- `Stiff_ODEs_Report.ipynb`: full report with derivations, code, and plots
